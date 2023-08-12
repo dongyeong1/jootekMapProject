@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80px;
+}
+
+.overlaybox {
+    background-color: white;
+    border: 1px solid green;
+    border-radius: 20px;
+    position: relative;
+    width: 80px;
+    height: 30px;
+}
+.overlaybox:hover {
+    background-color: green;
+    color: white;
+}
+.overlaybox::after {
+    position: absolute;
+
+    content: "";
+    /* top: 100%;
+    left: 50%;
+    transform: translateX(-50%); */
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-top: 5px solid green;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+.animation {
+    border: none;
+    border-radius: 10px;
+    width: 30px;
+    font-size: 12px;
+    background-color: green;
+    color: white;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+    /* visibility: hidden; */
+    opacity: 0;
+    transform: translateY(30%);
+    transition: all 0.2s;
+}
+
+.overlaybox:hover ~ .container div:first-child {
+    /* visibility: visible; */
+    color: red;
+}
+.animation {
+    width: 80px;
+}
+
+.container:hover .animation:not(:hover) {
+    transform: translateY(0%);
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.mapWrapper {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    height: 100vh;
+}
+.mapsize {
+    position: absolute;
+    width: 75%;
+    left: 25%;
+}
+
+.asdasdas {
+    background-color: green;
+}
+.asdasdas:hover + .qqq {
+    background-color: red;
+}
+.boxtitle {
+    color: green;
+}
+.markerbox {
+    display: flex;
+}
+.infoboxWrapper {
+    display: flex;
+    flex-direction: row;
+}
+.arrow {
+    position: absolute;
+    /* background-color: red; */
+    left: 0px;
+    top: 0;
+    z-index: 100;
+    /* width: 10px; */
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 40px solid black;
+
+    border-right: 40px solid transparent;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+}
+.aa {
+    left: 25%;
+}
+
+.info {
+    opacity: 0;
+    background-color: white;
+    height: 100vh;
+    /* width: 400px; */
+    width: 25%;
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.dong {
+    opacity: 1;
+}
