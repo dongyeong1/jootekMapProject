@@ -60,10 +60,10 @@ const Kakaomap = () => {
             // });
             var content =
                 "<div class='container'>" +
-                "<div class='animation'>토지</div>" +
                 '<div class="overlaybox" onClick="dong()" >' +
                 "<div class='markerbox'><div>ds</div><div>ds</div></div>" +
                 "</div>" +
+                "<div class='animation'>토지</div>" +
                 "</div>";
             var customOverlay = new kakao.maps.CustomOverlay({
                 map: mapdata,
@@ -185,6 +185,15 @@ const Kakaomap = () => {
         }
     }, []);
 
+    const zoomIn = () => {
+        let level = mapdata.getLevel();
+        mapdata.setLevel(level - 1);
+    };
+
+    const zoomOut = () => {
+        let level = mapdata.getLevel();
+        mapdata.setLevel(level + 1);
+    };
     return (
         <div>
             <div id="map" className="mapWrapper"></div>
@@ -194,6 +203,10 @@ const Kakaomap = () => {
             </div>
             <div className="buttonWrapper">
                 <button onClick={current}>현재위치보기</button>
+            </div>
+            <div className="levelWrapper">
+                <button onClick={zoomIn}>+</button>
+                <button onClick={zoomOut}>-</button>
             </div>
         </div>
     );
