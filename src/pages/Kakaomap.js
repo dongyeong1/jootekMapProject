@@ -139,12 +139,61 @@ const Kakaomap = () => {
         map.classList.toggle("mapsize");
     };
 
+    function displayMarker(currentPosition) {
+        let marker = new kakao.maps.Marker({
+            map: mapdata,
+            position: currentPosition,
+        });
+
+        mapdata.setCenter(currentPosition);
+    }
+
+    const current = () => {
+        // console.log(sessionStorage.getItem("currentLoacation"));
+        if (sessionStorage.getItem("currentLat")) {
+            const lat = sessionStorage.getItem("currentLat");
+            const lon = sessionStorage.getItem("currentLon");
+            let currentPosition = new kakao.maps.LatLng(lat, lon);
+
+            displayMarker(currentPosition);
+        } else {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+
+                    let currentPosition = new kakao.maps.LatLng(lat, lon);
+                    displayMarker(currentPosition);
+                });
+            } else {
+                alert("gps 를 지원하지않습니다.");
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+
+                // let currentPosition = new kakao.maps.LatLng(lat, lon);
+
+                sessionStorage.setItem("currentLat", lat);
+                sessionStorage.setItem("currentLon", lon);
+            });
+        }
+    }, []);
+
     return (
         <div>
             <div id="map" className="mapWrapper"></div>
             <div className="infoboxWrapper">
-                <div className="info">dsa</div>
+                <div className="info">정보</div>
                 <div className="arrow" onClick={showInfo}></div>
+            </div>
+            <div className="buttonWrapper">
+                <button onClick={current}>현재위치보기</button>
             </div>
         </div>
     );
